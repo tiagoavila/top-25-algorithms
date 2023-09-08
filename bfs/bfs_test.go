@@ -3,10 +3,11 @@ package bfs
 import (
 	"reflect"
 	"testing"
+	"top25algorithms/graph"
 )
 
 func TestBFS(t *testing.T) {
-	graph := NewGraph()
+	graph := graph.NewGraph()
 
 	// Adding edges to the graph
 	graph.AddEdge(1, 2)
@@ -16,7 +17,7 @@ func TestBFS(t *testing.T) {
 	graph.AddEdge(3, 4)
 
 	// Perform BFS starting from vertex 1.
-	result := graph.BFS(1)
+	result := BFS(graph, 1)
 
 	// Define the expected result.
 	expected := []int{1, 2, 3, 4}
@@ -28,7 +29,7 @@ func TestBFS(t *testing.T) {
 }
 
 func TestBFSWithExampleFromTop25Algorithms(t *testing.T) {
-	graph := NewGraph()
+	graph := graph.NewGraph()
 
 	// Adding edges to the graph
 	graph.AddEdge(1, 2)
@@ -44,7 +45,7 @@ func TestBFSWithExampleFromTop25Algorithms(t *testing.T) {
 	graph.AddEdge(7, 12)
 
 	// Perform BFS starting from vertex 1.
-	result := graph.BFS(1)
+	result := BFS(graph, 1)
 
 	// Define the expected result.
 	expected := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}

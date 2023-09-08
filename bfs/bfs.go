@@ -1,35 +1,8 @@
 package bfs
 
-import (
-	"fmt"
-)
+import "top25algorithms/graph"
 
-type Graph struct {
-	vertices map[int][]int
-}
-
-func NewGraph() *Graph {
-	return &Graph{
-		vertices: make(map[int][]int),
-	}
-}
-
-func (g *Graph) AddEdge(v1, v2 int) {
-	g.vertices[v1] = append(g.vertices[v1], v2)
-	g.vertices[v2] = append(g.vertices[v2], v1)
-}
-
-func (g *Graph) PrintGraph() {
-	for vertex, neighbors := range g.vertices {
-		fmt.Printf("Vertex %d: ", vertex)
-		for _, neighbor := range neighbors {
-			fmt.Printf("%d ", neighbor)
-		}
-		fmt.Println()
-	}
-}
-
-func (g *Graph) BFS(startingVertex int) []int {
+func BFS(g *graph.Graph, startingVertex int) []int {
 	// Create a map to track visited vertices
 	visitedVertexes := make(map[int]bool)
 	// Mark the starting vertex as visited
@@ -48,7 +21,7 @@ func (g *Graph) BFS(startingVertex int) []int {
 		result = append(result, vertex)
 
 		// Explore neighbors of the current vertex
-		for _, neighbor := range g.vertices[vertex] {
+		for _, neighbor := range g.Vertices[vertex] {
 			// Check if the neighbor has been visited
 			_, visited := visitedVertexes[neighbor]
 			if !visited {

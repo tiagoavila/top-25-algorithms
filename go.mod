@@ -1,3 +1,3 @@
-module top-25-algorithms
+module top25algorithms
 
 go 1.20
