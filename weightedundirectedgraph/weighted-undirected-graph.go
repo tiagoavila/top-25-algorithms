@@ -12,29 +12,29 @@ type Edge struct {
 }
 
 type WeightedUndirectedGraph struct {
-	vertices  int            // Number of vertices in the graph
-	adjacency map[int][]Edge // Adjacency list to store edges
+	Vertices  int            // Number of vertices in the graph
+	Adjacency map[int][]Edge // Adjacency list to store edges
 }
 
 func NewGraph(vertices int) *WeightedUndirectedGraph {
 	return &WeightedUndirectedGraph{
-		vertices:  vertices,
-		adjacency: make(map[int][]Edge),
+		Vertices:  vertices,
+		Adjacency: make(map[int][]Edge),
 	}
 }
 
 func (g *WeightedUndirectedGraph) AddEdge(src, dest int, weight float64) {
 	// Add an undirected edge between src and dest with the given weight
 	edge := Edge{src, dest, weight}
-	g.adjacency[src] = append(g.adjacency[src], edge)
+	g.Adjacency[src] = append(g.Adjacency[src], edge)
 
 	// Since it's an undirected graph, we add an edge in the opposite direction as well
 	edge = Edge{dest, src, weight}
-	g.adjacency[dest] = append(g.adjacency[dest], edge)
+	g.Adjacency[dest] = append(g.Adjacency[dest], edge)
 }
 
 func (g *WeightedUndirectedGraph) PrintGraph() {
-	for vertex, edges := range g.adjacency {
+	for vertex, edges := range g.Adjacency {
 		fmt.Printf("Vertex %d -> ", vertex)
 		for _, edge := range edges {
 			fmt.Printf("(Dest: %d, Weight: %.2f) ", edge.dest, edge.weight)
@@ -45,7 +45,7 @@ func (g *WeightedUndirectedGraph) PrintGraph() {
 
 func (g *WeightedUndirectedGraph) GetUniqueEdges() []Edge {
 	uniqueEdges := make(map[string]Edge)
-	for _, edges := range g.adjacency {
+	for _, edges := range g.Adjacency {
 		for _, edge := range edges {
 			// Create a unique key for each edge based on the src and dest vertices
 			key := fmt.Sprintf("%d-%d", edge.src, edge.dest)
