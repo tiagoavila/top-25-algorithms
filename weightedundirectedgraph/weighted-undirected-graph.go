@@ -47,7 +47,8 @@ func (g *WeightedUndirectedGraph) PrintGraph() {
 
 func (g *WeightedUndirectedGraph) GetUniqueEdges() []Edge {
 	uniqueEdges := make(map[string]Edge)
-	for _, vertice := range g.GetVertices() {
+	v := g.GetVertices()
+	for _, vertice := range v {
 		for _, edge := range g.Adjacency[vertice] {
 			// Check if the reverse key exists (e.g., if there's an edge from A to B, check if there's an edge from B to A)
 			reverseKey := fmt.Sprintf("%d-%d", edge.Dest, edge.Src)
@@ -81,5 +82,11 @@ func (g *WeightedUndirectedGraph) SortEdgesByWeight(edges []Edge) []Edge {
 }
 
 func (g *WeightedUndirectedGraph) GetVertices() []int {
-	return maps.Keys(g.Adjacency)
+	keys := maps.Keys(g.Adjacency)
+
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i] < keys[j]
+	})
+
+	return keys
 }
