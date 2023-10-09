@@ -3,12 +3,14 @@ package weightedundirectedgraph
 import (
 	"fmt"
 	"sort"
+
+	"golang.org/x/exp/maps"
 )
 
 type Edge struct {
-	src    int     // Source vertex
-	dest   int     // Destination vertex
-	weight float64 // Weight of the edge
+	Src    int     // Source vertex
+	Dest   int     // Destination vertex
+	Weight float64 // Weight of the edge
 }
 
 type WeightedUndirectedGraph struct {
@@ -37,7 +39,7 @@ func (g *WeightedUndirectedGraph) PrintGraph() {
 	for vertex, edges := range g.Adjacency {
 		fmt.Printf("Vertex %d -> ", vertex)
 		for _, edge := range edges {
-			fmt.Printf("(Dest: %d, Weight: %.2f) ", edge.dest, edge.weight)
+			fmt.Printf("(Dest: %d, Weight: %.2f) ", edge.Dest, edge.Weight)
 		}
 		fmt.Println()
 	}
@@ -45,17 +47,16 @@ func (g *WeightedUndirectedGraph) PrintGraph() {
 
 func (g *WeightedUndirectedGraph) GetUniqueEdges() []Edge {
 	uniqueEdges := make(map[string]Edge)
-	for _, edges := range g.Adjacency {
-		for _, edge := range edges {
-			// Create a unique key for each edge based on the src and dest vertices
-			key := fmt.Sprintf("%d-%d", edge.src, edge.dest)
-
+	for _, vertice := range g.GetVertices() {
+		for _, edge := range g.Adjacency[vertice] {
 			// Check if the reverse key exists (e.g., if there's an edge from A to B, check if there's an edge from B to A)
-			reverseKey := fmt.Sprintf("%d-%d", edge.dest, edge.src)
+			reverseKey := fmt.Sprintf("%d-%d", edge.Dest, edge.Src)
 			_, reverseExists := uniqueEdges[reverseKey]
 
 			// If the reverse edge doesn't exist, add the current edge to the uniqueEdges map
 			if !reverseExists {
+				// Create a unique key for each edge based on the src and dest vertices
+				key := fmt.Sprintf("%d-%d", edge.Src, edge.Dest)
 				uniqueEdges[key] = edge
 			}
 		}
@@ -73,8 +74,12 @@ func (g *WeightedUndirectedGraph) GetUniqueEdges() []Edge {
 func (g *WeightedUndirectedGraph) SortEdgesByWeight(edges []Edge) []Edge {
 	// Use the sort.Slice function to sort the edges by weight in ascending order
 	sort.Slice(edges, func(i, j int) bool {
-		return edges[i].weight < edges[j].weight
+		return edges[i].Weight < edges[j].Weight
 	})
 
 	return edges
+}
+
+func (g *WeightedUndirectedGraph) GetVertices() []int {
+	return maps.Keys(g.Adjacency)
 }
