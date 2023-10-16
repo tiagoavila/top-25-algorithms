@@ -16,7 +16,7 @@ func TestKruskalMinimumSpanningTree1(t *testing.T) {
 	graph.AddEdge(2, 3, 5)
 
 	// Calculate the minimum spanning tree
-	minimumSpanningTree := KruskalMST(graph)
+	minimumSpanningTree := FindMST(graph)
 
 	// Expected minimum spanning tree
 	expectedEdges := []weightedundirectedgraph.Edge{
@@ -44,7 +44,7 @@ func TestKruskalMinimumSpanningTree2(t *testing.T) {
 	graph.AddEdge(3, 4, 2)
 
 	// Calculate the minimum spanning tree
-	minimumSpanningTree := KruskalMST(graph)
+	minimumSpanningTree := FindMST(graph)
 
 	// Expected minimum spanning tree
 	expectedEdges := []weightedundirectedgraph.Edge{
@@ -81,7 +81,7 @@ func TestKruskalMinimumSpanningTreeFromGeeksForGeeks(t *testing.T) {
 	graph.AddEdge(7, 1, 11)
 
 	// Calculate the minimum spanning tree
-	minimumSpanningTree := KruskalMST(graph)
+	minimumSpanningTree := FindMST(graph)
 
 	// Expected minimum spanning tree
 	expectedEdges := []weightedundirectedgraph.Edge{

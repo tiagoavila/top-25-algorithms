@@ -5,7 +5,7 @@ import (
 	"top25algorithms/weightedundirectedgraph"
 )
 
-func KruskalMST(graph *weightedundirectedgraph.WeightedUndirectedGraph) []weightedundirectedgraph.Edge {
+func FindMST(graph *weightedundirectedgraph.WeightedUndirectedGraph) []weightedundirectedgraph.Edge {
 	minimumSpanningTree := make([]weightedundirectedgraph.Edge, 0, graph.Vertices-1)
 
 	// #1 Sort all the edges in non-decreasing order of their weight.
@@ -24,6 +24,7 @@ func KruskalMST(graph *weightedundirectedgraph.WeightedUndirectedGraph) []weight
 		rootSrc := ds.Find(edge.Src)
 		rootDest := ds.Find(edge.Dest)
 
+		// Check if it forms a cycle with the spanning tree formed so far. If the cycle is not formed, include this edge. Else, discard it.
 		if rootSrc != rootDest {
 			minimumSpanningTree = append(minimumSpanningTree, edge)
 			ds.Union(edge.Src, edge.Dest)
