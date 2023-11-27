@@ -1,21 +1,21 @@
 package weighteddirectedgraph
 
 type Edge struct {
-	Dest   int     // Destination vertex
-	Weight float64 // Weight of the edge
+	Dest   string // Destination vertex
+	Weight int    // Weight of the edge
 }
 
 type WeightedDirectedGraph struct {
-	Vertices map[int][]Edge // Adjacency list to store edges
+	Vertices map[string][]Edge // Adjacency list to store edges
 }
 
 func NewGraph() *WeightedDirectedGraph {
 	return &WeightedDirectedGraph{
-		Vertices: make(map[int][]Edge),
+		Vertices: make(map[string][]Edge),
 	}
 }
 
-func AddEdge(g *WeightedDirectedGraph, src, dest int, weight float64) {
+func (g *WeightedDirectedGraph) AddEdge(src, dest string, weight int) {
 	// Add a directed edge between src and dest with the given weight
 	edge := Edge{dest, weight}
 	g.Vertices[src] = append(g.Vertices[src], edge)
