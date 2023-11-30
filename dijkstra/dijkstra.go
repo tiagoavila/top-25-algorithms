@@ -33,7 +33,7 @@ func lessThan(d1, d2 DijkstraNode) bool {
 	return d1.Weight < d2.Weight
 }
 
-func Dijkstra(graph *weighteddirectedgraph.WeightedDirectedGraph, src, dest string) {
+func FindShortestPathWithDijkstra(graph *weighteddirectedgraph.WeightedDirectedGraph, src, dest string) []string {
 	priorityQueue := queue.PriorityQueueInit(lessThan)
 	knownDistances := make(map[string]DijkstraNode)
 
@@ -87,20 +87,26 @@ func Dijkstra(graph *weighteddirectedgraph.WeightedDirectedGraph, src, dest stri
 
 	// Print the shortest path from the source vertex to the destination vertex
 	node := knownDistances[dest]
-	path := ""
+	path := make([]string, 0, len(knownDistances))
 	for node.Vertex != "" {
-		if path == "" {
-			path = node.Vertex
-		} else {
-			path = node.Vertex + " -> " + path
-		}
-
+		path = append(path, node.Vertex)
 		node = knownDistances[node.Previous]
 	}
+
+	return reverseArray(path)
 }
 
 func updateQueueAndDistances(priorityQueue *queue.PriorityQueue[DijkstraNode], knownDistances map[string]DijkstraNode, srcVertice string, srcWeight int, edge weighteddirectedgraph.Edge) {
-	node := *NewDijkstraNode(edge.Dest, srcVertice, edge.Weight+srcWeight)
+	node := *NewDijkstraNode(edge.Dest, srcVertice, srcWeight+edge.Weight)
 	priorityQueue.Enqueue(node)
 	knownDistances[edge.Dest] = node
+}
+
+func reverseArray(arr []string) []string {
+	length := len(arr)
+	for i := 0; i < length/2; i++ {
+		arr[i], arr[length-i-1] = arr[length-i-1], arr[i]
+	}
+
+	return arr
 }
