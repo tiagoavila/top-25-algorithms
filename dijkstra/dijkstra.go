@@ -85,6 +85,16 @@ func FindShortestPathWithDijkstra(graph *weighteddirectedgraph.WeightedDirectedG
 		}
 	}
 
+	return parseKnownDistancesToArray(knownDistances, dest)
+}
+
+func updateQueueAndDistances(priorityQueue *queue.PriorityQueue[DijkstraNode], knownDistances map[string]DijkstraNode, srcVertice string, srcWeight int, edge weighteddirectedgraph.Edge) {
+	node := *NewDijkstraNode(edge.Dest, srcVertice, srcWeight+edge.Weight)
+	priorityQueue.Enqueue(node)
+	knownDistances[edge.Dest] = node
+}
+
+func parseKnownDistancesToArray(knownDistances map[string]DijkstraNode, dest string) []string {
 	// Print the shortest path from the source vertex to the destination vertex
 	node := knownDistances[dest]
 	path := make([]string, 0, len(knownDistances))
@@ -94,12 +104,6 @@ func FindShortestPathWithDijkstra(graph *weighteddirectedgraph.WeightedDirectedG
 	}
 
 	return reverseArray(path)
-}
-
-func updateQueueAndDistances(priorityQueue *queue.PriorityQueue[DijkstraNode], knownDistances map[string]DijkstraNode, srcVertice string, srcWeight int, edge weighteddirectedgraph.Edge) {
-	node := *NewDijkstraNode(edge.Dest, srcVertice, srcWeight+edge.Weight)
-	priorityQueue.Enqueue(node)
-	knownDistances[edge.Dest] = node
 }
 
 func reverseArray(arr []string) []string {
