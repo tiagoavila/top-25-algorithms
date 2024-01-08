@@ -2,15 +2,15 @@ package kadane
 
 import "math"
 
-func FindMaximumSumSubarray(arr []int) int {
+func FindMaximumSumSubarray(nums []int) int {
 	maxSoFar, maxEndingHere := math.MinInt, 0
 
-	if len(arr) == 1 {
-		return arr[0]
+	if len(nums) == 1 {
+		return nums[0]
 	}
 
-	for i := 0; i < len(arr); i++ {
-		maxEndingHere = maxEndingHere + arr[i]
+	for i := 0; i < len(nums); i++ {
+		maxEndingHere = maxEndingHere + nums[i]
 
 		if maxEndingHere > maxSoFar {
 			maxSoFar = maxEndingHere
