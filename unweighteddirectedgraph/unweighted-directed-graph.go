@@ -33,3 +33,21 @@ func (g *UnweightedDirectedGraph) increaseInDegree(dest string) {
 	verticeData.InDegree++
 	g.Vertices[dest] = verticeData
 }
+
+func (g *UnweightedDirectedGraph) DecreaseInDegree(dest string) {
+	verticeData := g.Vertices[dest]
+	verticeData.InDegree--
+	g.Vertices[dest] = verticeData
+}
+
+func (g *UnweightedDirectedGraph) GetInDegreeZeroVertices() []string {
+	inDegreeZeroVertices := make([]string, 0, len(g.Vertices))
+
+	for vertex, verticeData := range g.Vertices {
+		if verticeData.InDegree == 0 {
+			inDegreeZeroVertices = append(inDegreeZeroVertices, vertex)
+		}
+	}
+
+	return inDegreeZeroVertices
+}
