@@ -20,6 +20,7 @@ func TestComputeLPSArray(t *testing.T) {
 		{"Test3FromAbdulBariChannel", "AABCADAABE", []int{0, 1, 0, 0, 1, 0, 1, 2, 3, 0}},
 		{"Test4FromAbdulBariChannel", "AAAABAACD", []int{0, 1, 2, 3, 0, 1, 2, 0, 0}},
 		{"Test5FromAbdulBariChannel", "ABABD", []int{0, 0, 1, 2, 0}},
+		{"Test5FromGeeksForGeeks", "AAACAAAA", []int{0, 1, 2, 0, 1, 2, 3, 3}},
 	}
 
 	for _, tt := range tests {
@@ -39,9 +40,9 @@ func TestKMPPatternSearch(t *testing.T) {
 		pattern string
 		want    []int
 	}{
+		{"Test3", "AABAACAADAABAABA", "AABA", []int{0, 9, 12}},
 		{"Test1", "ABABCABCABABABD", "ABABD", []int{10}},
 		{"Test2", "ABABABABCABABABD", "ABABD", []int{11}},
-		{"Test3", "AABAACAADAABAABA", "AABA", []int{0, 9, 12}},
 		{"Test4", "ABCABCABCABC", "ABC", []int{0, 3, 6, 9}},
 		{"Test5", "GEEKSFORGEEKS", "GEEKS", []int{0, 8}},
 		{"Test5", "AAAAAA", "AA", []int{0, 1, 2, 3, 4}},
