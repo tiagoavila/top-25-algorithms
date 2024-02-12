@@ -37,6 +37,7 @@ func HeapSort(inputArray []int) []int {
 
 // So, the index of the last node that is a parent is not exactly half of the array length but rather (n - 2) / 2,
 // where n is the total number of nodes
+
 func Heapify(inputArray []int) *Heap {
 	outputArray := make([]int, len(inputArray))
 	copy(outputArray, inputArray)
