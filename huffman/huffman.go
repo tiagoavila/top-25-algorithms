@@ -22,6 +22,32 @@ func lessThan(h1, h2 HuffmanTreeNode) bool {
 	return h1.Frequency < h2.Frequency
 }
 
+func HuffmanCompression(value string) string {
+	codes := GetCodes(value)
+	compressedString := ""
+
+	for _, char := range value {
+		compressedString += codes[string(char)]
+	}
+
+	return compressedString
+}
+
+func DecompressHuffman(value string, codes map[string]string) string {
+	decompressedString, tempCode := "", ""
+
+	for _, char := range value {
+		tempCode += string(char)
+
+		if code, exists := codes[tempCode]; exists {
+			decompressedString += code
+			tempCode = ""
+		}
+	}
+
+	return decompressedString
+}
+
 func GetCodes(value string) map[string]string {
 	charsFrequency := make(map[string]int)
 
