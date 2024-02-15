@@ -62,12 +62,10 @@ func GetCodes(value string) map[string]string {
 	}
 
 	// Iterate through the map and create a Huffman tree node for each character and add it to the priority queue
-	leafNodes := make(map[string]*HuffmanTreeNode)
 	priorityQueue := queue.PriorityQueueInit(lessThan)
 
 	for key, value := range charsFrequency {
 		node := NewHuffmanTreeNode(key, value)
-		leafNodes[key] = node
 		priorityQueue.Enqueue(*node)
 	}
 
