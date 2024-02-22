@@ -1,5 +1,6 @@
 package boyermooremajorityvoting
 
+// https://www.geeksforgeeks.org/boyer-moore-majority-voting-algorithm/
 func FindMajorityElement(array []int) int {
 	candidate, count := 0, 0
 
